@@ -23,7 +23,7 @@ class TestController extends Controller
                     ['test_id', '=', $id],
                     ['user_id', '=', Auth::id()]
                 ])->first();
-                if ($test->quizzes) {
+                if (count($test->quizzes) > 0) {
                     $test->status = $result->status ?? null;
                     $test->user_started = $result->user_started ?? null;
                     $test->user_ended = $result->user_ended ?? null;
