@@ -75,6 +75,7 @@
                                 </label>
                             </div>
                         </div>
+                        @endif
                         @endforeach
                         @if ($test->type->id != 1)
                         <div class="form-group">
