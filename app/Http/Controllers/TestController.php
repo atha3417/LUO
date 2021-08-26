@@ -67,7 +67,7 @@ class TestController extends Controller
     {
         if (!$test->id) redirect('/cbt');
 
-        dd($test->quizzes);
+        dd(count($test->quizzes));
 
         if (count($test->quizzes) < 0) {
             redirect()->route('dashboard')->withErrors(['test' => 'Tes tidak ditemukan!']);
