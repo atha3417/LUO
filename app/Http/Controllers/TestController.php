@@ -65,7 +65,7 @@ class TestController extends Controller
 
     public function show(Test $test)
     {
-        if (!$test->id) redirect('/cbt');
+        if (!$test->id || count($test->quizzes) > 0) redirect('/cbt');
         $test->total_question = count($test->quizzes);
 
         $data = [
