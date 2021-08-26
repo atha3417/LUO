@@ -65,7 +65,11 @@ class TestController extends Controller
 
     public function show(Test $test)
     {
-        if (!$test->id || count($test->quizzes) < 0) redirect('/cbt');
+        if (!$test->id) redirect('/cbt');
+        if (count($test->quizzes) < 0) {
+            redirect()->route('dashboard')->withErrors(['test' => 'Tes tidak ditemukan!']);
+        }
+
         $test->total_question = count($test->quizzes);
 
         $data = [
