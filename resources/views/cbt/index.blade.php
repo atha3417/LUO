@@ -64,10 +64,10 @@
                                 {!! !$test->not_expired ? '<s>' . $test->test_name . '</s>' : $test->test_name !!}
                             </td>
                             <td>
-                                {!! !$test->not_expired ? '<s>' . $test->start_test . '</s>' : $test->test_name !!}
+                                {!! !$test->not_expired ? '<s>' . $test->start_test . '</s>' : $test->start_test !!}
                             </td>
                             <td>
-                                {!! !$test->not_expired ? '<s>' . $test->end_test . '</s>' : $test->test_name !!}
+                                {!! !$test->not_expired ? '<s>' . $test->end_test . '</s>' : $test->end_test !!}
                             </td>
                             <td>{!! !$test->not_expired ? '<p>EXPIRED</p>' : $test->status !!}</td>
                             <td>

@@ -491,7 +491,7 @@ function load() {
 
 function start_countdown(c) {
     var t;
-    timed_count(parseInt(c), t);
+    timed_count(c, t);
 }
 
 function change_time_left_view(hours_left, minutes_left, seconds_left) {
@@ -509,9 +509,7 @@ function timed_count(c, t) {
     var minutes_left = minutes < 10 ? "0" + minutes : minutes;
     var seconds_left = seconds < 10 ? "0" + seconds : seconds;
 
-    if (isNaN(c)) {
-        save_unix_timestamp_left(c);
-    }
+    save_unix_timestamp_left(c);
     change_time_left_view(hours_left, minutes_left, seconds_left);
 
     if (c == 0) {
