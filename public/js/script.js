@@ -491,7 +491,7 @@ function load() {
 
 function start_countdown(c) {
     var t;
-    timed_count(c, t);
+    timed_count(parseInt(c), t);
 }
 
 function change_time_left_view(hours_left, minutes_left, seconds_left) {
