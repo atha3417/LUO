@@ -142,7 +142,7 @@ class TestController extends Controller
             }
         }
 
-        if ($test->quizzes) {
+        if ($test->quizzes != []) {
             dd($test->quizzes);
             if ($test->quizzes[0]->answers) {
                 $my_choice = array_filter($test->quizzes[0]->answers->toArray(), function ($answer) {
