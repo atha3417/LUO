@@ -509,7 +509,7 @@ function timed_count(c, t) {
     var minutes_left = minutes < 10 ? "0" + minutes : minutes;
     var seconds_left = seconds < 10 ? "0" + seconds : seconds;
 
-    save_unix_timestamp_left(c);
+    save_unix_timestamp_left(c ?? 0);
     change_time_left_view(hours_left, minutes_left, seconds_left);
 
     if (c == 0) {
