@@ -143,9 +143,11 @@ class TestController extends Controller
         }
 
         if ($test->quizzes) {
-            $my_choice = array_filter($test->quizzes[0]->answers->toArray(), function ($answer) {
-                return $answer['user_id'] == Auth::id();
-            });
+            if ($test->quizzes[0]->answers) {
+                $my_choice = array_filter($test->quizzes[0]->answers->toArray(), function ($answer) {
+                    return $answer['user_id'] == Auth::id();
+                });
+            }
 
 
             if ($my_choice) {
