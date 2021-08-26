@@ -39,7 +39,7 @@
                             @csrf
                             <div class="input-group mb-3">
                                 <input type="text" id="username" name="username" class="form-control"
-                                    placeholder="Username" value="{{ old('username') }}" autofocus>
+                                    placeholder="Username" autofocus>
                                 <div class=" input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="input-group mb-3">
                                 <input type="password" id="password" name="password" class="form-control"
-                                    placeholder="Password" autocomplete="off" value="password">
+                                    placeholder="Password" autocomplete="off">
                                 <div class="input-group-append" id="show-password" data-placement="right"
                                     title="Show Password">
                                     <div class="input-group-text">
