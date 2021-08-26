@@ -23,11 +23,11 @@ class TestController extends Controller
                     ['test_id', '=', $id],
                     ['user_id', '=', Auth::id()]
                 ])->first();
-                if (count($test->quizzes) >= 0) {
-                    $test->status = $result->status ?? null;
-                    $test->user_started = $result->user_started ?? null;
-                    $test->user_ended = $result->user_ended ?? null;
-                    $test->not_expired = $this->time_larger_than($test->start_test, $test->end_test);
+                $test->status = $result->status ?? null;
+                $test->user_started = $result->user_started ?? null;
+                $test->user_ended = $result->user_ended ?? null;
+                $test->not_expired = $this->time_larger_than($test->start_test, $test->end_test);
+                if (count($test->quizzes) >= 2) {
                     array_push($tests, $test);
                 }
             }
@@ -67,7 +67,7 @@ class TestController extends Controller
     {
         if (!$test->id) redirect('/cbt');
 
-        if (count($test->quizzes) == 0) {
+        if (count($test->quizzes) < 2) {
             return redirect()->route('dashboard')->withErrors(['test' => 'Tes tidak ditemukan!']);
         }
 
