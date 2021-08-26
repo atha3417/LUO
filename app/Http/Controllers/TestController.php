@@ -23,11 +23,13 @@ class TestController extends Controller
                     ['test_id', '=', $id],
                     ['user_id', '=', Auth::id()]
                 ])->first();
-                $test->status = $result->status ?? null;
-                $test->user_started = $result->user_started ?? null;
-                $test->user_ended = $result->user_ended ?? null;
-                $test->not_expired = $this->time_larger_than($test->start_test, $test->end_test);
-                array_push($tests, $test);
+                if ($tests->quizzes) {
+                    $test->status = $result->status ?? null;
+                    $test->user_started = $result->user_started ?? null;
+                    $test->user_ended = $result->user_ended ?? null;
+                    $test->not_expired = $this->time_larger_than($test->start_test, $test->end_test);
+                    array_push($tests, $test);
+                }
             }
         }
 
@@ -142,13 +144,10 @@ class TestController extends Controller
             }
         }
 
-        if (count($test->quizzes) > 0) {
-            // dd($test->quizzes);
-            if ($test->quizzes[0]->answers) {
-                $my_choice = array_filter($test->quizzes[0]->answers->toArray(), function ($answer) {
-                    return $answer['user_id'] == Auth::id();
-                });
-            }
+        if ($test->quizzes) {
+            $my_choice = array_filter($test->quizzes[0]->answers->toArray(), function ($answer) {
+                return $answer['user_id'] == Auth::id();
+            });
 
 
             if ($my_choice) {
