@@ -70,7 +70,7 @@ class TestController extends Controller
         // dd(gettype(count($test->quizzes)));
 
         if (count($test->quizzes) == 0) {
-            redirect()->route('dashboard')->withErrors(['test' => 'Tes tidak ditemukan!']);
+            return redirect()->route('dashboard')->withErrors(['test' => 'Tes tidak ditemukan!']);
         }
 
         $test->total_question = count($test->quizzes);
