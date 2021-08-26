@@ -242,7 +242,7 @@ class AdminController extends Controller
             }
         } else {
             return redirect()->route('admin.manage.tests.create')->withErrors([
-                'start_test' => 'Waktu mulai harus lebih lama dari waktu selesai!'
+                'start_test' => 'Waktu selesai harus lebih lama dari waktu mulai!'
             ])->withInput();
         }
     }
