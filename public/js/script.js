@@ -525,7 +525,6 @@ function timed_count(c, t) {
 }
 
 function save_unix_timestamp_left(time_left) {
-    console.log(time_left);
     $.ajax({
         url: "/cbt/save-time-left/" + $("#current_test_id").val(),
         type: "POST",
