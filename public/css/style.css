@@ -1,0 +1,83 @@
+#closer {
+    position: fixed;
+    width: 100em;
+    height: 100em;
+    background-color: grey;
+    z-index: 9999;
+    opacity: 0;
+}
+
+#sort.th {
+    cursor: pointer;
+}
+
+.numbers {
+    margin-bottom: 5px;
+    border: 0.1px rgb(196, 191, 190) solid;
+}
+
+.numbers:hover {
+    background-color: #9aa1a3
+}
+
+.btn-num-active {
+    background-color: #ff2525;
+}
+
+.btn-num-active:hover {
+    background-color: #cf1c1c;
+}
+
+.btn-num-answered {
+    background-color: #1fbbd3;
+}
+
+.btn-num-answered:hover {
+    background-color: #348eee;
+}
+
+.btn-num-doubt {
+    background-color: #ffc107;
+}
+
+.btn-num-doubt:hover {
+    background-color: #d3a417;
+}
+
+.border-success {
+    border: 1px var(--success) solid;
+    border-radius: 5px;
+}
+
+.border-primary {
+    border: 1px var(--primary) solid;
+    border-radius: 5px;
+}
+
+.border-danger {
+    border: 1px var(--danger) solid;
+    border-radius: 5px;
+}
+
+.border-secondary {
+    border: 1px var(--secondary) solid;
+    border-radius: 5px;
+}
+
+.border-warning {
+    border: 1px var(--warning) solid;
+    border-radius: 5px;
+}
+
+.cp {
+    cursor: pointer;
+}
+
+.help-block {
+    line-height: 8px;
+}
+
+#btn-doubt {
+    width:10px;
+    height:10px;
+}

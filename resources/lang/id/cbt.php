@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'back_button_text' => 'Kembali',
+    'welcome_message_text' => 'Selamat Datang',
+    'small_welcome_message_text' => 'di Ujian Online Berbasis Komputer',
+    'info_before_test' => 'Silahkan pilih Tes yang diikuti dari daftar tes yang tersedia dibawah ini. Apabila tes tidak muncul, silahkan menghubungi Operator yang bertugas.',
+    'info_title' => 'Informasi',
+    'test_list_title' => 'Daftar Tes',
+    'test_number_text' => '#',
+    'test_name_text' => 'Nama Tes',
+    'test_type_text' => 'Tipe Soal',
+    'test_start_time_text' => 'Waktu Mulai Tes',
+    'test_end_time_text' => 'Waktu Selesai Tes',
+    'test_state_text' => 'Status',
+    'test_action_text' => 'Aksi',
+    'test_detail_text' => 'Lihat Detail',
+    'test_continue_text' => 'Lanjutkan',
+    'test_do_text' => 'Kerjakan',
+    'confirm_test_title' => 'Konfirmasi Tes',
+    'small_confirm_title' => 'Silahkan periksa kembali data tes yang akan diikuti',
+    'user_test_name_text' => 'Nama Peserta',
+    'duration_text' => 'Waktu Pengerjaan',
+    'duration_unit_text' => 'menit',
+    'total_question_text' => 'Jumlah Soal',
+    'question_text' => 'soal',
+    'basic_point_text' => 'Poin Dasar',
+    'max_point_text' => 'Poin Maksimal',
+    'test_created_at_text' => 'Test dibuat',
+    'test_updated_at_text' => 'Test diubah',
+    'test_for_text' => 'Untuk'
+];
