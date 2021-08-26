@@ -23,7 +23,7 @@ class TestController extends Controller
                     ['test_id', '=', $id],
                     ['user_id', '=', Auth::id()]
                 ])->first();
-                if (count($test->quizzes) > 0) {
+                if (count($test->quizzes) >= 0) {
                     $test->status = $result->status ?? null;
                     $test->user_started = $result->user_started ?? null;
                     $test->user_ended = $result->user_ended ?? null;
@@ -67,9 +67,9 @@ class TestController extends Controller
     {
         if (!$test->id) redirect('/cbt');
 
-        dd(count($test->quizzes) == 0);
+        // dd(count($test->quizzes) <= 0);
 
-        if (count($test->quizzes) < 0) {
+        if (count($test->quizzes) <= 0) {
             redirect()->route('dashboard')->withErrors(['test' => 'Tes tidak ditemukan!']);
         }
 
