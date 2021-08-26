@@ -14,7 +14,7 @@ Route::prefix('cbt')->middleware(['auth', 'active'])->group(function () {
             ->middleware(['for_me'])->name("cbt.test.start");
     });
 
-    Route::post('/save-time-left/{test}', [TestController::class, 'save_unix_time_left']);
+    Route::get('/save-time-left/{test}', [TestController::class, 'save_unix_time_left']);
     Route::post('/get-time-left/{test}', [TestController::class, 'get_unix_time_left']);
     Route::post('/get-all-question/{test}', [TestController::class, 'all_questions']);
     Route::post('save-answer/{quiz}', [TestController::class, 'save_answer'])
