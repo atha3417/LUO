@@ -51,7 +51,7 @@
                         <form action="{{ route('admin.manage.tests.users.save', $test->id) }}" method="POST"
                             id="form-participant">
                             @csrf
-                            <table id="dataTable2" class="table">
+                            <table id="dataTable" class="table">
                                 <thead>
                                     <tr>
                                         <th>No</th>
