@@ -13,7 +13,7 @@ class CreateChoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Choices', function (Blueprint $table) {
+        Schema::create('choices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quiz_id');
             $table->string('value');
@@ -28,6 +28,6 @@ class CreateChoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Choice');
+        Schema::dropIfExists('choice');
     }
 }

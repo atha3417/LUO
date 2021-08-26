@@ -67,8 +67,6 @@ class TestController extends Controller
     {
         if (!$test->id) redirect('/cbt');
 
-        // dd(gettype(count($test->quizzes)));
-
         if (count($test->quizzes) == 0) {
             return redirect()->route('dashboard')->withErrors(['test' => 'Tes tidak ditemukan!']);
         }
