@@ -79,8 +79,8 @@
                         @endforeach
                         @if ($test->type->id != 1)
                         <div class="form-group">
-                            <label for="answer">Example textarea</label>
-                            <textarea class="form-control" name="answer" rows="3"></textarea>
+                            <label for="answer">Jawaban</label>
+                            <textarea class="form-control" name="answer" id="answer" rows="3"></textarea>
                         </div>
                         @endif
                     </div>

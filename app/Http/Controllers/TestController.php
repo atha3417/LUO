@@ -251,8 +251,16 @@ class TestController extends Controller
             $answer->quiz_id = (int) $quiz->id;
             $answer->choice_id = (int) $request->id;
 
-            if ($quiz->choice_id) {
+            if ($quiz->test->type->id == 1 && $quiz->choice_id) {
                 if ($request->id == $quiz->choice_id) {
+                    $answer->is_correct = true;
+                } else {
+                    $answer->is_correct = null;
+                }
+            } else {
+                $answer->text_answer = $request->answer;
+
+                if ($request->answer == $quiz->correct_answer) {
                     $answer->is_correct = true;
                 } else {
                     $answer->is_correct = null;
