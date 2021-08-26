@@ -17,7 +17,7 @@ class CreateTimesTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('test_id');
-            $table->integer('time_left')->default(0);
+            $table->integer('time_left')->nullable();
             $table->timestamps();
         });
     }
