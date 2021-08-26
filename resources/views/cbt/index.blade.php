@@ -76,10 +76,11 @@
                                     class="btn btn-default btn-xs">{{ __('cbt.test_detail_text') }}</a>
                                 @elseif (!$test->not_expired)
                                 <p>EXPIRED</p>
-                                @elseif ($test->user_started && !$test->user_ended && $test->not_expired)
+                                @elseif ($test->user_started && !$test->user_ended && $test->not_expired &&
+                                $test->quizzes)
                                 <a href="{{ route('cbt.test.do', $test->id) }}"
                                     class="btn btn-warning btn-xs">{{ __('cbt.test_continue_text') }}</a>
-                                @elseif (!$test->user_ended && $test->not_expired)
+                                @elseif (!$test->user_ended && $test->not_expired && $test->quizzes)
                                 <a href="/cbt/confirm-test/{{ $test->id }}"
                                     class="btn btn-success btn-xs">{{ __('cbt.test_do_text') }}</a>
                                 @endif
