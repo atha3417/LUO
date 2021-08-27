@@ -14,10 +14,11 @@ class CreateAnswersTable extends Migration
     public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('quiz_id');
-            $table->foreignId('test_id');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('quiz_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('test_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('choice_id')->nullable();
             $table->longText('text_answer')->nullable();
             $table->boolean('is_correct')->nullable();

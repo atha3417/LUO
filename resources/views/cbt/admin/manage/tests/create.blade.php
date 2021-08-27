@@ -42,24 +42,10 @@
                                         placeholder="Enter test name" value="{{ old('name') }}" required autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label for="type">Type</label>
-                                    <select class="form-control select2bs4" name="type" id="type">
-                                        @foreach ($types as $type)
-                                        <option value="{{ $type->id }}" @if (old('type')==$type->id) selected @endif>
-                                            {{ $type->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label for="duration">Duration</label>
                                     <input type="text" class="form-control" id="duration" name="duration"
                                         placeholder="Enter test duration" value="{{ old('duration') }}" required
                                         autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <label for="basic_point">Basic Point</label>
-                                    <input type="text" class="form-control" id="basic-point" name="basic_point"
-                                        placeholder="Enter basic point" value="{{ old('basic_point') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="maximal_point">Maximal Point</label>
@@ -99,6 +85,10 @@
                                 <div class="mt-3">
                                     <a href="{{ route('admin.manage.tests') }}" class="btn btn-secondary">Back</a>
                                     <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="fill_question" class="btn btn-success"
+                                        value="fill_question">
+                                        Submit And Fill Question
+                                    </button>
                                 </div>
                             </form>
                         </div>

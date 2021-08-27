@@ -23,7 +23,6 @@ class TestFactory extends Factory
     {
         return [
             'test_name' => $this->faker->sentence(),
-            'type_id' => 1,
             'for' => $this->faker->biasedNumberBetween(1, 3) . ',' . $this->faker->biasedNumberBetween(3, 5) . ',' . $this->faker->biasedNumberBetween(2, 4),
             'start_test' => $this->faker->dateTime('now', 'Asia/Jakarta'),
             'end_test' => $this->faker->dateTime('now', 'Asia/Jakarta'),

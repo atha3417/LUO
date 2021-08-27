@@ -16,11 +16,10 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string('test_name');
-            $table->foreignId('type_id');
             $table->text('for')->nullable();
             $table->dateTime('start_test');
             $table->dateTime('end_test');
-            $table->float('basic_point');
+            $table->float('basic_point')->default(0);
             $table->float('maximal_point');
             $table->string('duration', 50);
             $table->timestamps();

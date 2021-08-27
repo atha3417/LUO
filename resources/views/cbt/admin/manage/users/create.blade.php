@@ -56,15 +56,20 @@
                                     <div class="form-group col-md-6">
                                         <label for="is_admin">Is Admin</label>
                                         <select name="is_admin" id="is_admin" class="custom-select">
-                                            <option value="false" selected>No</option>
-                                            <option value="true">Yes</option>
+                                            <option value="0" @if (old('is_admin')=='0' ) selected @endif>
+                                                No
+                                            </option>
+                                            <option value="1" @if (old('is_admin')=='1' ) selected @endif>Yes</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="is_super_admin">Is Super Admin</label>
                                         <select name="is_super_admin" id="is_super_admin" class="custom-select">
-                                            <option value="false">No</option>
-                                            <option value="true">Yes</option>
+                                            <option value="0" @if (old('super_admin')=='0' ) selected @endif>
+                                                No
+                                            </option>
+                                            <option value="1" @if (old('super_admin')=='1' ) selected @endif>Yes
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -72,7 +77,7 @@
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="7 Characters (letter and number)" value="{{ old('password') }}"
+                                        placeholder="8 Characters (letter and number)" value="{{ old('password') }}"
                                         required autocomplete="off">
                                 </div>
                                 <div class="form-check">

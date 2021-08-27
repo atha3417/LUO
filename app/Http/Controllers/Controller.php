@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function time_larger_than($first, $second)
+    protected function time_larger_than($first, $second, $type = 'validation')
     {
         $first_date = explode('-', explode(' ', $first)[0]);
         $first_time = explode(':', explode(' ', $first)[1]);
@@ -26,9 +26,17 @@ class Controller extends BaseController
         $current_time = explode(':', explode(' ', $now)[1]);
         $current = mktime($current_time[0], $current_time[1], $current_time[2], $current_date[1], $current_date[2], $current_date[0]);
 
-        if ($first <= $current && $current <= $second) {
-            return true;
+        if ($type == 'validation') {/* VALIDATION BEFORE CREATE NEW TEST */
+            if ($first < $second && $current < $second) {
+                return true;
+            }
+        } else {/* IS TEST EXPIRED */
+            if ($first <= $current && $current <= $second) {
+                return true;
+            }
         }
+
+
         return false;
     }
 }

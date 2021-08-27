@@ -42,7 +42,7 @@
                         <tr style="height: 45px;">
                             <td></td>
                             <td>{{ __('cbt.total_question_text') }}</td>
-                            <td>{{ $test->total_question }} {{ __('cbt.question_text') }} {{ $test->type->name }}
+                            <td>{{ $test->total_question }} {{ __('cbt.question_text') }}
                             </td>
                             <td></td>
                         </tr>

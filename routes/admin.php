@@ -28,5 +28,13 @@ Route::prefix('/cbt/admin/manage')->middleware(['auth', 'active', 'admin', 'no_t
         Route::get('/{test}/users', [AdminController::class, 'manage_tests_user'])->name('admin.manage.tests.users');
         Route::put('/', [AdminController::class, 'manage_tests_update'])->name('admin.manage.tests.update');
         Route::delete('/{test}', [AdminController::class, 'manage_tests_destroy'])->name('admin.manage.tests.delete');
+
+        Route::get('/{test}/questions', [AdminController::class, 'manage_tests_questions'])->name('admin.manage.tests.questions');
+        Route::post('/{test}/questions', [AdminController::class, 'manage_tests_questions_store'])->name('admin.manage.tests.questions.store');
+        Route::get('/{test}/questions/create', [AdminController::class, 'manage_tests_questions_create'])->name('admin.manage.tests.questions.create');
+        Route::put('/{test}/questions/{quiz}', [AdminController::class, 'manage_tests_questions_update'])->name('admin.manage.tests.questions.update');
+        Route::delete('/{test}/questions/{quiz}', [AdminController::class, 'manage_tests_questions_destroy'])->name('admin.manage.tests.questions.delete');
+        Route::get('/{test}/questions/{quiz}', [AdminController::class, 'manage_tests_questions_show'])->name('admin.manage.tests.questions.show');
+        Route::get('/{test}/questions/{quiz}/edit', [AdminController::class, 'manage_tests_questions_edit'])->name('admin.manage.tests.questions.edit');
     });
 });

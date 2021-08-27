@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/css/style-admin.css">
 </head>
 
@@ -151,15 +152,17 @@
     <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
     <!-- InputMask -->
     <script src="/plugins/moment/moment.min.js"></script>
     <script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-
     <!-- Select2 -->
     <script src="/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Summernote -->
+    <script src="https://cdn.tiny.cloud/1/z6u87t8quz1nw4suo2g7d1m82297o69ut5x4qvkani1g69hj/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <!-- My Script -->
     <script src="/js/admin/script.js"></script>
 </body>
 

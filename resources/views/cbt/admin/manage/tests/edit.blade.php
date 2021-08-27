@@ -45,16 +45,6 @@
                                         required autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label for="type">Type</label>
-                                    <select class="form-control select2bs4" name="type" id="type">
-                                        @foreach ($types as $type)
-                                        <option value="{{ $type->id }}" @if (old('type') ?? $test->type->id==$type->id)
-                                            selected @endif>
-                                            {{ $type->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label for="duration">Duration</label>
                                     <input type="text" class="form-control" id="duration" name="duration"
                                         placeholder="Enter test duration"

@@ -6,3 +6,7 @@
 .cp {
     cursor: pointer;
 }
+
+.ch {
+    cursor: help;
+}

@@ -14,8 +14,10 @@ class CreateQuizzesTable extends Migration
     public function up()
     {
         Schema::create('quizzes', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('test_id');
+            $table->foreignId('test_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('type_id');
             $table->integer('choice_id')->nullable();
             $table->longText('question');
             $table->longText('correct_answer')->nullable();

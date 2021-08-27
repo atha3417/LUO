@@ -56,19 +56,33 @@
                                         placeholder="Enter Class" value="{{ old('class') ?? $user->class }}" required>
                                 </div>
                                 @if (Auth::user()->super_admin)
-                                <div class="form-group">
-                                    <label for="is_admin">Is Admin</label>
-                                    <select name="is_admin" id="is_admin">
-                                        <option value="false">No</option>
-                                        <option value="true">Yes</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="is_super_admin">Is Super Admin</label>
-                                    <select name="is_super_admin" id="is_super_admin">
-                                        <option value="false">No</option>
-                                        <option value="true">Yes</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="is_admin">Is Admin</label>
+                                        <select name="is_admin" id="is_admin" class="custom-select">
+                                            <option value="0" @if ($user->is_admin ==
+                                                '0') selected
+                                                @endif>
+                                                No
+                                            </option>
+                                            <option value="1" @if ($user->is_admin == '1')
+                                                selected
+                                                @endif>Yes</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="is_super_admin">Is Super Admin</label>
+                                        <select name="is_super_admin" id="is_super_admin" class="custom-select">
+                                            <option value="0" @if ($user->super_admin ==
+                                                '0') selected
+                                                @endif>
+                                                No
+                                            </option>
+                                            <option value="1" @if ($user->super_admin ==
+                                                '1') selected
+                                                @endif>Yes</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 @endif
                                 <div class="form-group">
@@ -91,4 +105,5 @@
             </div>
         </div>
 </section>
+{{-- {{ dd(old('is_admin')) }} --}}
 @endsection

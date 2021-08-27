@@ -14,9 +14,10 @@ class CreateResultsTable extends Migration
     public function up()
     {
         Schema::create('results', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('test_id');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('test_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->float('status')->nullable();
             $table->string('user_started')->nullable();
             $table->string('user_ended')->nullable();

@@ -14,6 +14,6 @@ class Type extends Model
 
     public function tests()
     {
-        return $this->hasMany(Test::class);
+        return $this->hasMany(Quiz::class);
     }
 }

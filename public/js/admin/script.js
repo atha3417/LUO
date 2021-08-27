@@ -90,8 +90,8 @@ function get_test_detail() {
         success: function (res) {
             if (res) {
                 $("#test_name").val(res.test_name);
-                $("#type").val(res.type.name);
                 $("#for").val(res.for);
+                $("#total_question").val(res.quizzes.length);
                 $("#start_time").val(res.start_test);
                 $("#end_time").val(res.end_test);
                 $("#basic_point").val(res.basic_point);
@@ -144,6 +144,18 @@ function init_select2() {
     $(".select2bs4").select2({
         theme: "bootstrap4",
     });
+
+    $("#choices").select2({
+        theme: "bootstrap4",
+        tags: true,
+        placeholder: "Insert Choices",
+        allowClear: true,
+    });
+
+    $("#choice").select2({
+        theme: "bootstrap4",
+        placeholder: "Select Correct Choice",
+    });
 }
 
 function init_datetime_picker() {
@@ -182,17 +194,113 @@ function submit_form_participant() {
     $("#form-participant").submit();
 }
 
+function change_answer() {
+    if ($("#type-question").val() == 1) {
+        $("#choice-div").removeClass("d-none");
+        $("#answer-div").addClass("d-none");
+    } else {
+        $("#choice-div").addClass("d-none");
+        $("#answer-div").removeClass("d-none");
+    }
+}
+
+function list_correct_answer_field() {
+    var value = $(this).val();
+
+    $("#choice").select2({
+        theme: "bootstrap4",
+        placeholder: "Select Correct Choice",
+        data: value,
+    });
+
+    if (value.length == 0) {
+        $("#choice").html("");
+    }
+}
+
+function get_question_detail() {
+    $.ajax({
+        url:
+            "/cbt/admin/manage/tests/" +
+            $(this).data("id") +
+            "/questions/" +
+            $(this).data("quiz-id"),
+        type: "GET",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        cache: false,
+        success: function (res) {
+            if (res) {
+                $("#question").html(res.quiz.question);
+
+                if (res.quiz.type_id == 1) {
+                    var choices = `<ul>`;
+                    res.choices.forEach((choice) => {
+                        choices += `
+                        <li>${choice.value}</li>
+                    `;
+                    });
+                    choices += `</ul>`;
+                    $("#available_choices").html(choices);
+                    $("#correct_choice").val(res.choice.value);
+                    $("#answer-div").addClass("d-none");
+                    $("#choice-div").removeClass("d-none");
+                } else if (res.quiz.type_id == 2) {
+                    $("#answer").html(res.quiz.correct_answer);
+                    $("#choice-div").addClass("d-none");
+                    $("#answer-div").removeClass("d-none");
+                }
+            }
+        },
+    });
+}
+
+function init_tinymce() {
+    tinymce.init({
+        selector: "textarea.tinymce",
+        plugins:
+            "print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export",
+        mobile: {
+            plugins:
+                "print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable",
+        },
+        menu: {
+            tc: {
+                title: "Comments",
+                items: "addcomment showcomments deleteallconversations",
+            },
+        },
+        menubar: "file edit view insert format tools table tc help",
+        toolbar:
+            "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment",
+        image_advtab: true,
+        height: 500,
+        image_caption: true,
+        quickbars_selection_toolbar:
+            "bold italic | quicklink h2 h3 blockquote quickimage quicktable",
+        toolbar_mode: "sliding",
+        tinycomments_mode: "embedded",
+        contextmenu: "link image imagetools table configurepermanentpen",
+    });
+}
+
 $(document).ready(function () {
     $("#show-password").on("change", showPassword);
     $("#submit-form-participant").on("click", submit_form_participant);
     $("#select_all").on("click", check_or_not);
     $(".participants").on("click", check_core_checkbox);
+    $("#type-question").on("change", change_answer);
+    $("#choices").on("change", list_correct_answer_field);
     $(".btn-detail").each(get_test_details);
     $("#btn-user").on("click", get_user_participants);
+    $(".btn-detail-question").on("click", get_question_detail);
     $("#th-checkbox").css("cursor", "default");
+    change_answer();
     check_core_checkbox();
     init_select2();
     init_datetime_picker();
     init_dataTable();
     set_logout_btn();
+    init_tinymce();
 });

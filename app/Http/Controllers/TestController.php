@@ -8,6 +8,7 @@ use App\Models\Result;
 use App\Models\Test;
 use App\Models\Time;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
@@ -26,7 +27,7 @@ class TestController extends Controller
                 $test->status = $result->status ?? null;
                 $test->user_started = $result->user_started ?? null;
                 $test->user_ended = $result->user_ended ?? null;
-                $test->not_expired = $this->time_larger_than($test->start_test, $test->end_test);
+                $test->not_expired = $this->time_larger_than($test->start_test, $test->end_test, 'expired');
                 if (count($test->quizzes) >= 2) {
                     array_push($tests, $test);
                 }
@@ -251,7 +252,7 @@ class TestController extends Controller
             $answer->quiz_id = (int) $quiz->id;
             $answer->choice_id = (int) $request->id;
 
-            if ($quiz->test->type->id == 1 && $quiz->choice_id) {
+            if ($quiz->type->id == 1 && $quiz->choice_id) {
                 if ($request->id == $quiz->choice_id) {
                     $answer->is_correct = true;
                 } else {
@@ -321,7 +322,7 @@ class TestController extends Controller
             return $response;
         }
 
-        $quiz->choices = $quiz->choices;
+        $quiz->choices = Arr::shuffle($quiz->choices);
         $quiz->my_choice = Answer::where([
             ['user_id', '=', Auth::id()],
             ['quiz_id', '=', $quiz->id]

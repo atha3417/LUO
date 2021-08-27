@@ -14,9 +14,10 @@ class CreateTimesTable extends Migration
     public function up()
     {
         Schema::create('times', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('test_id');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('test_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->integer('time_left')->default(0)->nullable();
             $table->integer('time_continue')->default(0)->nullable();
             $table->integer('time_pause')->default(0)->nullable();
