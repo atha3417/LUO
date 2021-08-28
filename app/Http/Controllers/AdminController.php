@@ -425,16 +425,16 @@ class AdminController extends Controller
                     'value' => $available_choice
                 ]);
             }
-        }
 
-        $correct_choice = Choice::where([
-            ['quiz_id', '=', $quiz->id],
-            ['value', '=', $request->choice]
-        ])->first();
+            $correct_choice = Choice::where([
+                ['quiz_id', '=', $quiz->id],
+                ['value', '=', $request->choice]
+            ])->first();
 
-        if ($correct_choice) {
-            $quiz->choice_id = $correct_choice->id;
-            $quiz->save();
+            if ($correct_choice) {
+                $quiz->choice_id = $correct_choice->id;
+                $quiz->save();
+            }
         }
 
         if ($quiz) {
@@ -481,25 +481,32 @@ class AdminController extends Controller
         $quiz->test_id = $test->id;
         $quiz->correct_answer = $request->answer;
 
-        if ($request->old_choices && $request->choices) {
-        }
-        dd($request->all());
+        if ($request->choices) {
+            Choice::where('quiz_id', '=', $quiz->id)->get()->delete();
 
-        $correct_choice = Choice::where([
-            ['quiz_id', '=', $quiz->id],
-            ['value', '=', $request->choice]
-        ])->first();
+            foreach ($request->choices as $available_choice) {
+                Choice::create([
+                    'quiz_id' => $quiz->id,
+                    'value' => $available_choice
+                ]);
+            }
 
-        if ($correct_choice) {
-            $quiz->choice_id = $correct_choice->id;
-            $quiz->save();
+            $correct_choice = Choice::where([
+                ['quiz_id', '=', $quiz->id],
+                ['value', '=', $request->choice]
+            ])->first();
+
+            if ($correct_choice) {
+                $quiz->choice_id = $correct_choice->id;
+                $quiz->save();
+            }
         }
 
         if ($quiz->save()) {
-            return redirect()->route('admin.manage.tests.questions', $test->id)->with('message', 'Berhasil menambahkan pertanyaan baru!');
+            return redirect()->route('admin.manage.tests.questions', $test->id)->with('message', 'Berhasil mengubah pertanyaan baru!');
         } else {
             return redirect()->route('admin.manage.tests.questions', $test->id)->withErrors([
-                'user' => 'Gagal menambahkan pertanyaan baru!'
+                'user' => 'Gagal mengubah pertanyaan baru!'
             ])->withInput();
         }
     }

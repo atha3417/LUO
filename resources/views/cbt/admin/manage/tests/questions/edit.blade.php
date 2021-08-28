@@ -71,13 +71,6 @@
                                 <div id="choice-div">
                                     <label for="choices">Available Choices</label>
                                     <div class="form-group">
-                                        <select class="d-none" name="old_choices[]" multiple="multiple">
-                                            @foreach ($quiz->choices as $choice)
-                                            <option class="built-in-choices" value="{{ $choice['value'] }}" selected>
-                                                {{ $choice['value'] }}
-                                            </option>
-                                            @endforeach
-                                        </select>
                                         <select class="form-control select2bs4-tags" name="choices[]" id="choices"
                                             multiple="multiple">
                                             @php
