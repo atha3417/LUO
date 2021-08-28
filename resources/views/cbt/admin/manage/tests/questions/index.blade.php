@@ -73,8 +73,7 @@
                                             data-quiz-id="{{ $quiz->id }}">
                                             <i class="fas fa-fw fa-info"></i>
                                         </button>
-                                        <a href="{{ route('admin.manage.tests.questions.edit',['test' => $test->id, 'quiz' => $quiz->id]) }}"
-                                            class="btn badge badge-pill badge-primary">
+                                        <a href="" class="btn badge badge-pill badge-primary">
                                             <i class="fas fa-fw fa-dot-circle"></i>
                                         </a>
                                         <a href="{{ route('admin.manage.tests.questions.edit',['test' => $test->id, 'quiz' => $quiz->id]) }}"
