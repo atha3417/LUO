@@ -482,7 +482,16 @@ class AdminController extends Controller
         $quiz->correct_answer = $request->answer;
 
         if ($request->choices) {
-            Choice::where('quiz_id', '=', $quiz->id)->get()->delete();
+            foreach ($request->old_choices as $old_choice) {
+                $this_choice = Choice::where([
+                    ['quiz_id', '=', $quiz->id],
+                    ['value', '=', $old_choice]
+                ])->first();
+
+                if ($this_choice) {
+                    $this_choice->delete();
+                }
+            }
 
             foreach ($request->choices as $available_choice) {
                 Choice::create([
@@ -503,10 +512,10 @@ class AdminController extends Controller
         }
 
         if ($quiz->save()) {
-            return redirect()->route('admin.manage.tests.questions', $test->id)->with('message', 'Berhasil mengubah pertanyaan baru!');
+            return redirect()->route('admin.manage.tests.questions', $test->id)->with('message', 'Berhasil mengubah pertanyaan!');
         } else {
             return redirect()->route('admin.manage.tests.questions', $test->id)->withErrors([
-                'user' => 'Gagal mengubah pertanyaan baru!'
+                'user' => 'Gagal mengubah pertanyaan!'
             ])->withInput();
         }
     }

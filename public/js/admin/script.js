@@ -141,15 +141,19 @@ function get_user_participants() {
 }
 
 function init_select2() {
-    $(".select2bs4").select2({
-        theme: "bootstrap4",
-    });
-
-    $("#choices").select2({
+    var choices = $("#choices").select2({
         theme: "bootstrap4",
         tags: true,
         placeholder: "Insert Choices",
         allowClear: true,
+    });
+    choices.on("select2:unselect", function (e) {
+        $("select#choices option[value='" + e.params.data.id + "'")[0].remove();
+        $("select#choice option[value='" + e.params.data.id + "'")[0].remove();
+    });
+
+    $(".select2bs4").select2({
+        theme: "bootstrap4",
     });
 
     $("#choice").select2({
@@ -205,7 +209,7 @@ function change_answer() {
 }
 
 function list_correct_answer_field() {
-    var value = $(this).val();
+    var value = $("#choices").val();
 
     $("#choice").select2({
         theme: "bootstrap4",
