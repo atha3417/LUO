@@ -79,7 +79,7 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li class="nav-header">Manage</li>
+                        <li class="nav-header">Admin</li>
                         <li class="nav-item">
                             <a href="{{ route('admin.manage.users') }}"
                                 class="nav-link @if (Request::segment(4) == 'users') active @endif">
@@ -96,7 +96,8 @@
                         </li>
                         <li class="nav-header">Other</li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.other.files') }}" class="nav-link @if (Request::segment(4) == 'files') active @endif">
+                            <a href="{{ route('admin.other.files') }}"
+                                class="nav-link @if (Request::segment(4) == 'files') active @endif">
                                 <i class="nav-icon fas fa-folder-open"></i>
                                 <b>Files</b>
                             </a>
