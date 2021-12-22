@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/u1548240/exam
-    - /usr/bin/rsync -Paz * $DEPLOYPATH --delete
+    - /bin/cp -R * %DEPLOYPATH
