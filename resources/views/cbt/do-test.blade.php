@@ -34,7 +34,7 @@
                 <h3 class="card-title float-left">Soal ke <span id="current_number">1</span></h3>
                 <h3 id="sisa-waktu" class="card-title float-right" style="background-color: #90EE90; height: 25px;">
                     <b>
-                        <p style="font-size:20px; color:red">
+                        <p style="font-size:20px; color:black; font-weigh: bold;">
                             &nbsp;&nbsp;
                             <span id="time-left">
                                 <span id="hours-left">00</span>
