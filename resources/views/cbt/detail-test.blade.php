@@ -35,11 +35,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label col-form-label col-form-label-sm">Waktu Tes
-                                Mulai</label>
+                            <label class="col-sm-3 control-label col-form-label col-form-label-sm">Waktu Tes Mulai</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control form-control-sm input-sm"
-                                    value="{{ $test->start_test }}" readonly>
+                                    value="{{ $result->user_started }}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label col-form-label col-form-label-sm">Waktu Tes Selesai</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control form-control-sm input-sm"
+                                    value="{{ $result->user_ended }}" readonly>
                             </div>
                         </div>
                     </div>
@@ -48,7 +54,7 @@
                             <label class="col-sm-3 control-label col-form-label col-form-label-sm">Nilai</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control form-control-sm input-sm"
-                                    value="{{ $result->status }} / {{ $test->maximal_point }} (nilai / nilai maksimal) "
+                                    value="{{ $result->status }}"
                                     readonly>
                             </div>
                         </div>
@@ -56,7 +62,15 @@
                             <label class="col-sm-3 control-label col-form-label col-form-label-sm">Benar</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control form-control-sm input-sm"
-                                    value="{{ $test->total_correct_answer }}  /  {{ $test->total_question }}  (jawaban benar / total soal)"
+                                    value="{{ $test->total_correct_answer }}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label col-form-label col-form-label-sm">Salah</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control form-control-sm input-sm"
+                                    value="{{ $test->total_question - $test->total_correct_answer }}"
                                     readonly>
                             </div>
                         </div>

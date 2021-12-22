@@ -51,12 +51,6 @@
                                         value="{{ old('duration') ?? $test->duration }}" required autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label for="basic_point">Basic Point</label>
-                                    <input type="text" class="form-control" id="basic-point" name="basic_point"
-                                        placeholder="Enter basic point"
-                                        value="{{ old('basic_point') ?? $test->basic_point }}">
-                                </div>
-                                <div class="form-group">
                                     <label for="maximal_point">Maximal Point</label>
                                     <input type="text" class="form-control" id="maximalpoint" name="maximal_point"
                                         placeholder="Enter maximal point"

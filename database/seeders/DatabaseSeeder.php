@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $app_mode = env('APP_MODE', 'development');
+        $app_mode = env('APP_MODE', 'production');
 
         Type::create([
             'name' => 'PG'

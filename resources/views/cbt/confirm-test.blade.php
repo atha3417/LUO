@@ -48,12 +48,6 @@
                         </tr>
                         <tr style="height: 45px;">
                             <td></td>
-                            <td>{{ __('cbt.basic_point_text') }}</td>
-                            <td>{{ $test->basic_point }}</td>
-                            <td></td>
-                        </tr>
-                        <tr style="height: 45px;">
-                            <td></td>
                             <td>{{ __('cbt.max_point_text') }}</td>
                             <td>{{ $test->maximal_point }}</td>
                             <td></td>

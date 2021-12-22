@@ -94,6 +94,13 @@
                                 <b>Tests</b>
                             </a>
                         </li>
+                        <li class="nav-header">Other</li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.other.files') }}" class="nav-link @if (Request::segment(4) == 'files') active @endif">
+                                <i class="nav-icon fas fa-folder-open"></i>
+                                <b>Files</b>
+                            </a>
+                        </li>
                         <li class="nav-header">Users</li>
                         <li class="nav-item">
                             <a href="#" class="nav-link btn-logout">
@@ -162,7 +169,6 @@
     <!-- Summernote -->
     <script src="https://cdn.tiny.cloud/1/z6u87t8quz1nw4suo2g7d1m82297o69ut5x4qvkani1g69hj/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
-    <!-- My Script -->
     <script src="/js/admin/script.js"></script>
 </body>
 

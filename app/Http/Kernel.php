@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'completed' => \App\Http\Middleware\IsTestCompleted::class,
         'not_completed' => \App\Http\Middleware\IsTestNotCompleted::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
+        'super_admin' => \App\Http\Middleware\IsSuperAdmin::class,
         'active' => \App\Http\Middleware\IsActive::class,
         'for_me' => \App\Http\Middleware\IsForMe::class,
         'test_not_started' => \App\Http\Middleware\IsTestNotStarted::class,

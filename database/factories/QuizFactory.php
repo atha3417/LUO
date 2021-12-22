@@ -22,6 +22,7 @@ class QuizFactory extends Factory
     public function definition()
     {
         return [
+            'type_id' => 1,
             'test_id' => $this->faker->biasedNumberBetween(1, 5),
             'question' => $this->faker->realText(),
             'correct_answer' => $this->faker->sentence()

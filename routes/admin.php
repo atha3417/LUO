@@ -38,3 +38,10 @@ Route::prefix('/cbt/admin/manage')->middleware(['auth', 'active', 'admin', 'no_t
         Route::get('/{test}/questions/{quiz}/edit', [AdminController::class, 'manage_tests_questions_edit'])->name('admin.manage.tests.questions.edit');
     });
 });
+
+Route::prefix('/cbt/admin/other')->middleware(['auth', 'active', 'super_admin', 'no_test_in_progress'])->group(function () {
+    Route::redirect(
+        '/files',
+        'https://storage.athatsaqif.com/login.php'
+    )->name('admin.other.files');
+});

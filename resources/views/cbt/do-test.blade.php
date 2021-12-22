@@ -61,7 +61,7 @@
                     <div id="choices">
                         @foreach ($test->quizzes[0]->choices as $choice)
                         @php ($choice_id = $choice->id) @endphp
-                        @if ($test->type->id == 1)
+                        {{-- @if ($test->type->id == 1) --}}
                         <div class="form-check">
                             <div class="radio">
                                 <input type="radio" class="form-check-input" name="choice"
@@ -75,14 +75,14 @@
                                 </label>
                             </div>
                         </div>
-                        @endif
+                        {{-- @endif --}}
                         @endforeach
-                        @if ($test->type->id != 1)
-                        <div class="form-group">
+                        {{-- @if ($test->type->id != 1) --}}
+                        <!--<div class="form-group">
                             <label for="answer">Jawaban</label>
                             <textarea class="form-control" name="answer" id="answer" rows="3"></textarea>
-                        </div>
-                        @endif
+                        </div>-->
+                        {{-- @endif --}}
                     </div>
                     @endif
                 </div>

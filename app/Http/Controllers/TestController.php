@@ -36,7 +36,11 @@ class TestController extends Controller
 
         $data = [
             'title' => 'Dashboard',
-            'tests' => $tests
+            'tests' => $tests,
+            'result' => [
+                'user_started' => $result->user_started ?? null,
+                'user_ended' => $result->user_ended ?? null
+            ]
         ];
         return view('cbt.index', $data);
     }
@@ -322,7 +326,8 @@ class TestController extends Controller
             return $response;
         }
 
-        $quiz->choices = Arr::shuffle($quiz->choices);
+        $quiz->choices = $quiz->choices;
+        // $quiz->choices = Arr::shuffle($quiz->choices);
         $quiz->my_choice = Answer::where([
             ['user_id', '=', Auth::id()],
             ['quiz_id', '=', $quiz->id]
@@ -362,7 +367,9 @@ class TestController extends Controller
                 });
 
                 $result->user_ended = now();
-                $result->status = (count($correct_answers) * $test->basic_point);
+                // $result->status = (count($correct_answers) * $test->basic_point);
+                $perscore = ($test->maximal_point) / (count($test->quizzes));
+                $result->status = (count($correct_answers) * $perscore);
 
                 if ($result->save()) {
                     $response['status'] = 'success';

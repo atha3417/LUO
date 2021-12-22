@@ -64,10 +64,26 @@
                                 {!! !$test->not_expired ? '<s>' . $test->test_name . '</s>' : $test->test_name !!}
                             </td>
                             <td>
-                                {!! !$test->not_expired ? '<s>' . $test->start_test . '</s>' : $test->start_test !!}
+                                @if (!$test->not_expired)
+                                    {!! '<s>' . $test->start_test . '</s>' !!}
+                                @else
+                                    @if($test->user_ended)
+                                        {{ $result['user_started'] }}
+                                    @else
+                                        {{ $test->start_test }}
+                                    @endif
+                                @endif
                             </td>
                             <td>
-                                {!! !$test->not_expired ? '<s>' . $test->end_test . '</s>' : $test->end_test !!}
+                                @if (!$test->not_expired)
+                                    {!! '<s>' . $test->end_test . '</s>' !!}
+                                @else
+                                    @if($test->user_ended)
+                                        {{ $result['user_ended'] }}
+                                    @else
+                                        {{ $test->end_test }}
+                                    @endif
+                                @endif
                             </td>
                             <td>{!! !$test->not_expired ? '<p>EXPIRED</p>' : $test->status !!}</td>
                             <td>
