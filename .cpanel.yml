@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/u1548240/progare
-    - /bin/cp -R * %DEPLOYPATH
