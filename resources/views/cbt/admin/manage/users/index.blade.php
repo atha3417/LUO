@@ -63,7 +63,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->class }}</td>
                                     <td width="130">
-                                        <button title="{{ $user->is_active == '0' ? 'Tidak Aktif' : 'Aktif' }}"
+                                        <button title="{{ $user->is_active == '0' ? 'Aktifkan' : 'Nonaktifkan' }}"
                                             class="btn btn-primary badge badge-pill" id="toggle-active"
                                             onclick="toggleActive('{{ $user->id }}')">
                                             @if ($user->is_active == '0')
