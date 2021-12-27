@@ -107,6 +107,10 @@
                                     <a href="{{ route('admin.manage.tests.questions', $test->id) }}"
                                         class="btn btn-secondary">Back</a>
                                     <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="fill_question" value="fill_question"
+                                        class="btn btn-success">
+                                        Submit and Fill Another Question
+                                    </button>
                                 </div>
                             </form>
                         </div>

@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manage All Tests</h1>
+                <h1>{{ ucwords($user->username) }}'s result</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -52,38 +52,31 @@
                                     <th>{{ __('cbt.test_name_text') }}</th>
                                     <th>{{ __('cbt.total_question_text') }}</th>
                                     <th>{{ __('cbt.test_start_time_text') }}</th>
+                                    <th>{{ __('cbt.test_end_time_text') }}</th>
                                     <th>{{ __('cbt.test_action_text') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($tests as $test)
+                                @foreach ($results as $result)
                                 <tr>
                                     <th scope="row" width="1">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $test->test_name }}</td>
-                                    <td>{{ count($test->quizzes) }}</td>
-                                    <td>{{ $test->start_test }}</td>
+                                    <td>{{ $result->test->test_name }}</td>
+                                    <td>{{ count($result->test->quizzes) }}</td>
+                                    <td>{{ $result->user_started }}</td>
+                                    <td>{{ $result->user_ended }}</td>
                                     <td>
                                         <button title="Test Detail" type="button"
                                             class="btn btn-secondary badge badge-pill btn-detail" data-toggle="modal"
-                                            data-target="#modal-detail" data-id="{{ $test->id }}">
+                                            data-target="#modal-detail" data-id="{{ $result->test->id }}">
                                             <i class="fas fa-fw fa-info"></i>
                                         </button>
-                                        <a title="Manage Questions"
-                                            href="{{ route('admin.manage.tests.questions', $test->id) }}"
+                                        <a title="All Questions and Answers"
+                                            href="{{ route('admin.manage.tests.questions', $result->test->id) }}"
                                             class="btn badge badge-pill badge-info">
-                                            <i class="fas fa-fw fa-book-open"></i>
+                                            <i class="fas fa-fw fa-poll"></i>
                                         </a>
-                                        <a title="Edit Test" href="{{ route('admin.manage.tests.edit', $test->id) }}"
-                                            class="btn badge badge-pill badge-success">
-                                            <i class="fas fa-fw fa-edit"></i>
-                                        </a>
-                                        <a title="Manage Participants"
-                                            href="{{ route('admin.manage.tests.users', $test->id) }}"
-                                            class="btn badge badge-pill badge-primary">
-                                            <i class="fas fa-fw fa-user"></i>
-                                        </a>
-                                        <form action="{{ route('admin.manage.tests.delete', $test->id) }}" method="POST"
-                                            class="d-inline">
+                                        <form action="{{ route('admin.manage.tests.delete', $result->id) }}"
+                                            method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
 

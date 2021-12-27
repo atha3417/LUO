@@ -88,11 +88,40 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('admin.manage.users') }}"
+                                class="nav-link @if (Request::segment(4) == 'classes') active @endif">
+                                <i class="nav-icon fas fa-layer-group"></i>
+                                <b>Classes</b>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.manage.tests') }}"
                                 class="nav-link @if (Request::segment(4) == 'tests') active @endif">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <b>Tests</b>
                             </a>
+                        </li>
+                        <li class="nav-item @if (Request::segment(4) == 'results') menu-open @endif">
+                            <a href="#" class="nav-link @if (Request::segment(4) == 'results') active @endif">
+                                <i class="nav-icon fas fa-poll-h"></i>
+                                <b>Results</b>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.manage.results.by_users') }}"
+                                        class="nav-link @if (Request::segment(4) == 'results' && Request::segment(5) == 'by-users') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <b>By Users</b>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <b>By Tests</b>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-header">Other</li>
                         <li class="nav-item">

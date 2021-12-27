@@ -153,8 +153,8 @@ class AdminController extends Controller
             return redirect()->route('admin.manage.users')->with('message', 'Berhasil menghapus user!');
         } else {
             return redirect()->route('admin.manage.users')->withErrors([
-                'user' => 'Gagal menghapus user baru!'
-            ])->withInput();
+                'user' => 'Gagal menghapus user!'
+            ]);
         }
     }
 
@@ -243,7 +243,7 @@ class AdminController extends Controller
 
             if ($test) {
                 if ($request->fill_question) {
-                    return redirect()->route('admin.manage.tests.questions.create', $test->id)->with('message', 'Berhasil menambahkan tes baru! silahkan tambah pertanyaan!');
+                    return redirect()->route('admin.manage.tests.questions.create', $test->id);
                 }
 
                 return redirect()->route('admin.manage.tests')->with('message', 'Berhasil menambahkan tes baru!');
@@ -278,7 +278,6 @@ class AdminController extends Controller
                 'duration' => 'required|numeric|max:255',
                 'start_test' => 'required|string|max:255',
                 'end_test' => 'required|string|max:255',
-                'basic_point' => 'required|numeric|max:255',
                 'maximal_point' => 'required|numeric|max:255',
             ]);
 
@@ -287,7 +286,6 @@ class AdminController extends Controller
             $test->start_test = $request->start_test;
             $test->end_test = $request->end_test;
             $test->end_test = $request->end_test;
-            $test->basic_point = $request->basic_point;
             $test->maximal_point = $request->maximal_point;
 
             if ($test->save()) {
@@ -438,11 +436,15 @@ class AdminController extends Controller
         }
 
         if ($quiz) {
+            if ($request->fill_question) {
+                return redirect()->route('admin.manage.tests.questions.create', $test->id);
+            }
+
             return redirect()->route('admin.manage.tests.questions', $test->id)->with('message', 'Berhasil menambahkan pertanyaan baru!');
         } else {
             return redirect()->route('admin.manage.tests.questions', $test->id)->withErrors([
-                'user' => 'Gagal menambahkan pertanyaan baru!'
-            ])->withInput();
+                'question' => 'Gagal menambahkan pertanyaan baru!'
+            ]);
         }
     }
 
@@ -529,5 +531,128 @@ class AdminController extends Controller
                 'test' => 'Gagal menghapus pertanyaan!'
             ])->withInput();
         }
+    }
+
+    public function manage_tests_results_by_users()
+    {
+        $data = [
+            'title' => 'Results by Users',
+            'users' => User::all()
+        ];
+
+        return view('cbt.admin.manage.results.by_users.index', $data);
+    }
+
+    public function manage_tests_results_by_users_show(User $user)
+    {
+        $data = [
+            'title' => $user->username . '\'s Results',
+            'user' => $user,
+            'results' => $user->results
+        ];
+
+        return view('cbt.admin.manage.results.by_users.show', $data);
+    }
+
+    public function manage_tests_results_by_users_destroy(User $user)
+    {
+        foreach ($user->results as $result) {
+            $result->delete();
+        }
+
+        $my_tests = [];
+
+        if ($this->get_my_tests('tests', $user->id)) {
+            foreach ($this->get_my_tests('id', $user->id) as $id) {
+                array_push($my_tests, Test::find($id));
+            }
+        }
+
+        foreach ($my_tests as $my_test) {
+            $test = Test::find($my_test->id);
+            $new_for = [];
+            foreach (explode(',', $test->for) as $for) {
+                if ($for != $user->id) {
+                    array_push($new_for, $for);
+                }
+            }
+            $test->for = implode(',', $new_for);
+            $test->save();
+        }
+
+        foreach ($user->answers as $answer) {
+            $answer->delete();
+        }
+
+        return redirect()->route('admin.manage.results.by_users')->with('message', 'Berhasil menghapus hasil!');
+    }
+
+    public function manage_tests_results_by_users_destroy_all()
+    {
+        $users = User::all();
+        foreach ($users as $user) {
+            foreach ($user->results as $result) {
+                $result->delete();
+            }
+
+            $my_tests = [];
+
+            if ($this->get_my_tests('tests', $user->id)) {
+                foreach ($this->get_my_tests('id', $user->id) as $id) {
+                    array_push($my_tests, Test::find($id));
+                }
+            }
+
+            foreach ($my_tests as $my_test) {
+                $test = Test::find($my_test->id);
+                $new_for = [];
+                foreach (explode(',', $test->for) as $for) {
+                    if ($for != $user->id) {
+                        array_push($new_for, $for);
+                    }
+                }
+                $test->for = implode(',', $new_for);
+                $test->save();
+            }
+
+            foreach ($user->answers as $answer) {
+                $answer->delete();
+            }
+        }
+
+        return redirect()->route('admin.manage.results.by_users')->with('message', 'Berhasil menghapus hasil!');
+    }
+
+    protected function get_my_tests($type, $user_id, $test_id = 0)
+    {
+        $filtered_tests = [];
+        $is_for_me = false;
+
+        foreach (Test::all()->toArray() as $test) {
+            if (in_array($user_id, explode(',', $test['for']))) {
+                if ($type == 'id') {
+                    array_push($filtered_tests, $test['id']);
+                } else {
+                    array_push($filtered_tests, (object) $test);
+                }
+            }
+        }
+
+        if ($type == 'bool') {
+            foreach ($filtered_tests as $filtered_test) {
+                $for_me = in_array($test_id, (array) $filtered_test);
+                $key = array_keys((array) $filtered_test, $test_id);
+
+                if ($for_me == true && $key) {
+                    if ($key[0] == 'id') {
+                        $is_for_me = true;
+                    }
+                }
+            }
+
+            return $is_for_me;
+        }
+
+        return $filtered_tests;
     }
 }

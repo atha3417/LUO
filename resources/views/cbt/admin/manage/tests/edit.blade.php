@@ -45,7 +45,7 @@
                                         required autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label for="duration">Duration</label>
+                                    <label for="duration">Duration (minutes)</label>
                                     <input type="text" class="form-control" id="duration" name="duration"
                                         placeholder="Enter test duration"
                                         value="{{ old('duration') ?? $test->duration }}" required autofocus>

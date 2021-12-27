@@ -96,7 +96,7 @@ function get_test_detail() {
                 $("#end_time").val(res.end_test);
                 $("#basic_point").val(res.basic_point);
                 $("#max_point").val(res.maximal_point);
-                $("#duration").val(res.duration);
+                $("#duration").val(res.duration + ' menit');
                 $("#created_at").val(
                     moment(res.created_at).format("YYYY-MM-DD h:mm:ss")
                 );
@@ -164,12 +164,16 @@ function init_select2() {
 
 function init_datetime_picker() {
     $("#start-test").datetimepicker({
-        icons: { time: "far fa-clock" },
+        icons: {
+            time: "far fa-clock"
+        },
         format: "YYYY-MM-DD h:mm:ss",
     });
 
     $("#end-test").datetimepicker({
-        icons: { time: "far fa-clock" },
+        icons: {
+            time: "far fa-clock"
+        },
         format: "YYYY-MM-DD h:mm:ss",
     });
 }
@@ -224,8 +228,7 @@ function list_correct_answer_field() {
 
 function get_question_detail() {
     $.ajax({
-        url:
-            "/cbt/admin/manage/tests/" +
+        url: "/cbt/admin/manage/tests/" +
             $(this).data("id") +
             "/questions/" +
             $(this).data("quiz-id"),
@@ -263,11 +266,9 @@ function get_question_detail() {
 function init_tinymce() {
     tinymce.init({
         selector: "textarea.tinymce",
-        plugins:
-            "print preview importcss tinydrive searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons",
+        plugins: "print preview importcss tinydrive searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons",
         mobile: {
-            plugins:
-                "print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help charmap quickbars emoticons",
+            plugins: "print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help charmap quickbars emoticons",
         },
         menu: {
             tc: {
@@ -276,17 +277,23 @@ function init_tinymce() {
             },
         },
         menubar: "file edit view insert format tools table tc help",
-        toolbar:
-            "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment",
+        toolbar: "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment",
         image_advtab: true,
         height: 500,
         image_caption: true,
-        quickbars_selection_toolbar:
-            "bold italic | quicklink h2 h3 blockquote quickimage quicktable",
+        quickbars_selection_toolbar: "bold italic | quicklink h2 h3 blockquote quickimage quicktable",
         toolbar_mode: "sliding",
         tinycomments_mode: "embedded",
         contextmenu: "link image imagetools table configurepermanentpen",
     });
+}
+
+function selectAdminIfSuperAdminSelected() {
+    $('#is_admin').val('1');
+}
+
+function unselectSuperAdminIfAdminNotSelected() {
+    $('#is_super_admin').val('0');
 }
 
 $(document).ready(function () {
@@ -300,6 +307,8 @@ $(document).ready(function () {
     $("#btn-user").on("click", get_user_participants);
     $(".btn-detail-question").on("click", get_question_detail);
     $("#th-checkbox").css("cursor", "default");
+    $('#is_super_admin').on('change', selectAdminIfSuperAdminSelected);
+    $('#is_admin').on('change', unselectSuperAdminIfAdminNotSelected);
     change_answer();
     check_core_checkbox();
     init_select2();

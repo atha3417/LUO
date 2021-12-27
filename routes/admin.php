@@ -37,6 +37,15 @@ Route::prefix('/cbt/admin/manage')->middleware(['auth', 'active', 'admin', 'no_t
         Route::get('/{test}/questions/{quiz}', [AdminController::class, 'manage_tests_questions_show'])->name('admin.manage.tests.questions.show');
         Route::get('/{test}/questions/{quiz}/edit', [AdminController::class, 'manage_tests_questions_edit'])->name('admin.manage.tests.questions.edit');
     });
+
+    Route::prefix('results')->group(function () {
+        Route::prefix('/by-users')->group(function () {
+            Route::get('/', [AdminController::class, 'manage_tests_results_by_users'])->name('admin.manage.results.by_users');
+            Route::delete('/{user}', [AdminController::class, 'manage_tests_results_by_users_destroy'])->name('admin.manage.results.by_users.delete');
+            Route::delete('/', [AdminController::class, 'manage_tests_results_by_users_destroy_all'])->name('admin.manage.results.by_users.delete_all');
+            Route::get('/{user}', [AdminController::class, 'manage_tests_results_by_users_show'])->name('admin.manage.results.by_users.show');
+        });
+    });
 });
 
 Route::prefix('/cbt/admin/other')->middleware(['auth', 'active', 'super_admin', 'no_test_in_progress'])->group(function () {

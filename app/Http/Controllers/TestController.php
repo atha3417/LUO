@@ -8,7 +8,6 @@ use App\Models\Result;
 use App\Models\Test;
 use App\Models\Time;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
